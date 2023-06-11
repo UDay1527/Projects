@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title> TO-DO list</title>
+    <link href = "Todo-List.css" rel="stylesheet">
+</head>
+<body>
+    <p class="todo-title">
+        TODO List
+    </p>
+    <div class="input-divs">
+        <input class="todoInput todo-name-input" placeholder="Enter the Todo Name" onkeydown="keyenter(event.key)">
+
+        <input type="date" class="todoInputDate todo-date-button" onkeydown="keyenter(event.key)">
+
+        <button class="todoAdd todo-add-button">
+            Add
+        </button>
+    </div>
+    <div class="todoListOut todo-div"></div>
+
+    <button class="load-older-todos" onclick="loadOlderTodos()">
+        Load Todos
+    </button>
+
+    <button  class=" todoReset todo-reset-button">
+        Remove Todos
+    </button>
+
+    <script src="Todo-List.js"></script>
+</body>

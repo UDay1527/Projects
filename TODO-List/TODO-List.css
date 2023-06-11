@@ -1,0 +1,63 @@
+body{
+    font-family: arial;
+    background-color: grey;
+}
+
+.todo-title{
+    font-size:20px;
+    justify-content: center;
+    align-items: center;
+    margin-left: 175px;
+}
+
+.todo-div,
+.input-divs{
+    display: grid;
+    grid-template-columns: 200px 200px 100px;
+    column-gap: 10px;
+    row-gap: 10px;
+    margin: 10px;
+    align-items: center;
+}
+
+.input-divs{
+    margin-bottom: 10px;
+    align-items: stretch;
+}
+.todo-reset-button,
+.load-older-todos{
+    font-size: 15px;
+    padding: 10px;
+    background-color: black;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.no-todos-text{
+    font-size: 20px;
+    font-weight: bold;
+    display: flex;
+}
+.todo-name-input,
+.todo-date-button{
+    font-size: 15px;
+    padding: 6px;
+}
+
+.todo-add-button{
+    background-color: black;
+    color: white;
+    border: none;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+.delete-button{
+    background-color: white;
+    color: black;
+    border: none;
+    font-size: 15px;
+    cursor: pointer;
+    padding: 10px;
+}

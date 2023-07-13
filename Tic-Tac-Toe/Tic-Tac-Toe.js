@@ -58,6 +58,10 @@ document.querySelectorAll('.card').forEach((cardNumber,index) =>
 });
 
 let numList = [];
+document.querySelectorAll('.card').forEach((card,index) => 
+            {
+                numList[index] = card.classList;
+            })
 
 function reset() 
 {
@@ -85,14 +89,15 @@ function resetprocess()
 
 function pickComputerMove()
 {
+    let resultCheck = final();
     if(moves === 9)
     {
-        if(final() === 'X')
+        if(resultCheck === 'X')
         {
             result(0);
             reset();
         }
-        else if(final() === 'O')
+        else if(resultCheck === 'O')
         {
             result(1);
             reset();
@@ -105,7 +110,7 @@ function pickComputerMove()
     }
     else if(moves>= 5 && final())
     {
-        if(final() === 'X')
+        if(resultCheck === 'X')
         {
             result(0);
             reset();
@@ -115,56 +120,212 @@ function pickComputerMove()
             result(1);
             reset();
         }
-        
+        moves += 1;  
     }
     else
     {
-        result(5);  
-        let computerValue = Math.floor(Math.random() * 9);
-
-        document.querySelectorAll('.card').forEach((card,index) => 
+        result(5);
+        if(computerCheck())
         {
-            numList[index] = card.classList;
-        })
-
-        let num = numList[computerValue];
-        num = '.' + num[0];
-
-        if(document.querySelector(num).innerHTML === 'X' || document.querySelector(num).innerHTML === 'O')
-        {
-            pickComputerMove();
+            if(moves >= 5 && final())
+            {
+                if(final() === 'X')
+                {
+                    result(0);
+                    reset();
+                }
+                else if(final() === 'O')
+                {
+                    result(1);
+                    reset();
+                }
+            }
+            else
+            {
+                setTimeout(() => 
+                {
+                    whoseMove = true;
+                    result(4);
+                },1000);
+            }
+            moves+=1;
         }
         else
         {
-            document.querySelector(num).innerHTML = 'O';
-            moves += 1;
-        }
-        
-        if(moves >= 5 && final())
-        {
-            if(final() === 'X')
+            let computerValue = Math.floor(Math.random() * 9);
+            let num = numList[computerValue];
+            num = '.' + num[0];
+
+            if(document.querySelector(num).innerHTML === 'X' || document.querySelector(num).innerHTML === 'O')
             {
-                result(0);
-                reset();
+                pickComputerMove();
             }
-            else if(final() === 'O')
+            else
             {
-                result(1);
-                reset();
+                document.querySelector(num).innerHTML = 'O';
+                moves += 1;
             }
-        }
-        else
-        {
-            setTimeout(() => 
+            
+            if(moves >= 5 && final())
             {
-                whoseMove = true;
-                result(4);
-            },1000);
+                if(final() === 'X')
+                {
+                    result(0);
+                    reset();
+                }
+                else if(final() === 'O')
+                {
+                    result(1);
+                    reset();
+                }
+            }
+            else
+            {
+                setTimeout(() => 
+                {
+                    whoseMove = true;
+                    result(4);
+                },1000);
+            }
         }
     }
 };
 
-const final = () => {
+function condition(value)
+{
+    return document.querySelector(calculating(value)).innerHTML;
+}
+
+function calculating (value)
+{
+    let num = numList[value];
+    num = '.' + num[0];
+    return num;
+}
+
+const arr2 = [[0,1,2],[0,3,6],[0,4,8],[0,2,4]];
+const arr1 = ['O','X'];
+const arr = [[0,3,6],[0,1,2],[0,2]];
+
+function lshape()
+{
+    kloop:
+    for(let k=0;k<arr1.length;k++)
+    {
+        for(let j=0;j<arr.length-1;j++)
+        {
+            for(let i=0;i<arr[j].length;i++)
+            {
+                if (condition(arr[j][i])=== arr1[k] && condition(arr[j][i]+arr2[j][1]) === arr1[k])
+                {
+                    if(document.querySelector(calculating(arr[j][i]+arr2[j][2])).innerHTML)
+                    {
+                        continue;
+                    }
+                    else
+                    {
+                        document.querySelector(calculating(arr[j][i]+arr2[j][2])).innerHTML = 'O';
+                        i = j = k = 10;
+                        return 'O';
+                    }  
+                } 
+                else if  (condition(arr[j][i]) === arr1[k] && condition(arr[j][i]+ arr2[j][2]) === arr1[k])
+                {
+                    if(document.querySelector(calculating(arr[j][i]+ arr2[j][1])).innerHTML)
+                    {
+                        continue;
+                    }
+                    else
+                    {
+                        document.querySelector(calculating(arr[j][i]+ arr2[j][1])).innerHTML = 'O';
+                        i = j = k = 10;
+                        return 'O';
+                    }
+                } 
+                else if  (condition(arr[j][i]+arr2[j][1]) === arr1[k] && condition(arr[j][i]+arr2[j][2]) === arr1[k])
+                {
+                    if(document.querySelector(calculating(arr[j][i] + arr2[j][i])).innerHTML)
+                    {
+                        continue;
+                    }
+                    else
+                    {
+                        document.querySelector(calculating(arr[j][i] + arr2[j][i])).innerHTML = 'O';
+                        i = j = k = 10;
+                        return 'O';
+                    }
+                } 
+            }
+        }
+    }
+}
+
+function computerCheck()
+{
+    if(lshape())
+    {
+        return true;
+    }
+    else
+    {
+        const arr2 = [[0,1,2],[0,3,6],[0,4,8],[0,2,4]];
+        const arr1 = ['O','X'];
+        const arr = [[0,3,6],[0,1,2],[0,2]];
+        for(let k=0;k<2;k++)
+        {
+            for (let i=0;i<2;i++)
+            {
+                for(let j=0;j<3;j++)
+                {
+                    if(condition(arr[2][i] + arr2[i+2][0]) === arr1[k] && condition(arr[2][i] + arr2[i+2][1]) === arr1[k])
+                    {
+
+                        if(document.querySelector(calculating(arr[2][i] + arr2[i+2][2])).innerHTML)
+                        {
+                            continue;
+                        }
+                        else
+                        {
+                            document.querySelector(calculating(arr[2][i] + arr2[i+2][2])).innerHTML = 'O';
+                            i = j = k = 10;
+                            return 'O';
+                        }
+                    }
+                    else if(condition(arr[2][i] + arr2[i+2][2]) === arr1[k] && condition(arr[2][i] + arr2[i+2][1]) === arr1[k])
+                    {
+                        if(document.querySelector(calculating(arr[2][i] + arr2[i+2][0])).innerHTML)
+                        {
+                            continue;
+                        }
+                        else
+                        {
+                            document.querySelector(calculating(arr[2][i] + arr2[i+2][0])).innerHTML = 'O';
+                            i = j = k = 10;
+                            return 'O';
+                        }
+                    }
+                    else if(condition(arr[2][i] + arr2[i+2][0]) === arr1[k] && condition(arr[2][i] + arr2[i+2][2]) === arr1[k])
+                    {
+                        if(document.querySelector(calculating(arr[2][i] + arr2[i+2][1])).innerHTML)
+                        {
+                            continue;
+                        }
+                        else
+                        {
+                            document.querySelector(calculating(arr[2][i] + arr2[i+2][1])).innerHTML = 'O';
+                            i = j = k = 10;
+                            return 'O';
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+const final = () => 
+{
     const set1 = [0,1,2];
     const set2 = [0,3,6];
     const set3 = [0,2];
@@ -177,7 +338,6 @@ const final = () => {
                 if(condition(set1[i]) === condition(set1[i]+3) && condition(set1[i]) === condition(set1[i]+6))
                 {
                     return condition(set1[i]);
-                    break;
                 }
             }
         }
@@ -192,7 +352,6 @@ const final = () => {
                 if(condition(set2[i]) === condition(set2[i]+1) && condition(set2[i]) === condition(set2[i]+2))
                 {
                     return condition(set2[i]);
-                    break;
                 }
             }
         }
@@ -210,17 +369,6 @@ const final = () => {
         }
     }
 
-    function condition(value)
-    {
-        return document.querySelector(calculating(value)).innerHTML;
-    }
-
-    function calculating (value)
-    {
-        num = numList[value];
-        num = '.' + num[0];
-        return num;
-    }
     
     const value1 = fun1();
     const value2 = fun2();

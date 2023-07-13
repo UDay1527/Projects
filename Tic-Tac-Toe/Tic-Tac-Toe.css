@@ -6,19 +6,66 @@
     flex-wrap: wrap;
     align-content: center;
     background-color: white;
-    height: 500px;
-    width: 500px;
+    height: 486.5px;
+    width: 486.5px;
     top: 50%;
     left: 50%;
     transform: translate(-50%,-50%);    
 }
 
+.box-1{
+    border: none;
+    border-right: 2px solid;
+    border-bottom: 2px solid;
+}
+.box-2{
+    border: none;
+    border-bottom: 2px solid;
+    border-left: 2px solid;
+    border-right: 2px solid;
+}
+.box-3{
+    border: none;
+    border-left: 2px solid;
+    border-bottom: 2px solid;
+}
+.box-4{
+    border: none;
+    border-top: 2px solid;
+    border-bottom: 2px solid;
+    border-right: 2px solid;
+}
+.box-5{
+    border: 2px solid;
+}
+.box-6{
+    border:none;
+    border-top: 2px solid;
+    border-bottom: 2px solid;
+    border-left: 2px solid;
+}
+.box-7{
+    border: none;
+    border-top: 2px solid;
+    border-right: 2px solid;
+}
+.box-8{
+    border:none;
+    border-top: 2px solid;
+    border-left: 2px solid;
+    border-right: 2px solid;
+}
+.box-9{
+    border: none;
+    border-left: 2px solid;
+    border-top: 2px solid;
+}
+
 .card{
+    background-color: white;
     display: flex;
     justify-content: center;
     align-items: center;
-    border: 2px solid;
-    border-radius: 1px;
     padding: 80px;
     margin: 0;
     font-size: 50px;

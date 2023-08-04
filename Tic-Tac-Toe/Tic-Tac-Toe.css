@@ -6,9 +6,9 @@
     flex-wrap: wrap;
     align-content: center;
     background-color: white;
-    height: 486.5px;
-    width: 486.5px;
-    top: 50%;
+    height: 500px;
+    width: 500px;
+    top: 45%;
     left: 50%;
     transform: translate(-50%,-50%);    
 }
